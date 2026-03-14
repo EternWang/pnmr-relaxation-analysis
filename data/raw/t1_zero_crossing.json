@@ -1,0 +1,5 @@
+{
+  "tau0_ms": 35.5,
+  "sigma_tau0_ms": 2.5,
+  "notes": "Primary T1 estimate from notebook zero-crossing measurement; practical uncertainty set by 5 ms delay step and broad minimum."
+}

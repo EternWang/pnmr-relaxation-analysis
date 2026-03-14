@@ -1,0 +1,3 @@
+trace,cursor_x1_us,cursor_x2_us,delta_t_us,sigma_delta_t_us,interpretation
+single_A_pulse,-7.7,27.3,35.1,1.0,Finite-width single pulse on the correct 10^-5 s timescale.
+two_pulse_A_B_sequence,0.8,78.9,78.2,1.0,The B pulse is delayed relative to the A pulse and the separation shifts reproducibly.

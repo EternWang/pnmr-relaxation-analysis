@@ -1,0 +1,11 @@
+{
+  "t1_zero_crossing_ms": 51.216,
+  "t1_zero_crossing_sigma_ms": 3.607,
+  "t1_fit_ms": 52.099,
+  "t1_fit_sigma_ms": 1.079,
+  "t2_fit_ms": 44.545,
+  "t2_fit_sigma_ms": 1.052,
+  "baseline_mV": 118.1,
+  "baseline_rms_mV": 0.891,
+  "n_echo_peaks": 36
+}
