@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Keep language stats focused on the analysis code.
+notebooks/*.ipynb linguist-detectable=false
+report/*.pdf linguist-detectable=false
+report/*.tex linguist-detectable=false

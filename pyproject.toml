@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pnmr-analysis-showcase"
+name = "pnmr-relaxation-analysis"
 version = "0.1.0"
-description = "Reproducible pulsed-NMR analysis using Python"
+description = "Pulsed NMR relaxation analysis in Python"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
