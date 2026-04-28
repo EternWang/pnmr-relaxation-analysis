@@ -19,6 +19,9 @@ reporting, generated figures, and regression tests.
 
 The repository is organized so that the main reported quantities can be traced back to
 raw scope exports and timing measurements without relying on the PDF report alone.
+Beyond the physics result, it is also structured as a compact empirical replication
+package: raw measurements, modeling choices, reported numbers, and tests are connected
+through code that can be rerun.
 
 ## Key results
 
@@ -92,3 +95,8 @@ tests/      Regression tests for the analysis pipeline
 
 - Final report: `report/PNMR_report.pdf`
 - Executed notebook: `notebooks/01_pnmr_relaxation_analysis.ipynb`
+
+## Attribution
+
+Report authors: Hongyu Wang and Miles Bondoc.  
+Code and reproducible analysis pipeline maintained by Hongyu Wang.
