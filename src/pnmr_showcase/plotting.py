@@ -52,8 +52,11 @@ def _card(ax: plt.Axes, x: float, y: float, w: float, h: float, title: str, body
         linewidth=1.0,
     )
     ax.add_patch(box)
-    ax.text(x + 0.035, y + h - 0.07, title, ha="left", va="top", fontsize=11, weight="bold", color=color)
-    ax.text(x + 0.035, y + h - 0.145, body, ha="left", va="top", fontsize=9.4, color="#172033", linespacing=1.25)
+    title_y = y + h - 0.075 if body else y + h / 2
+    title_va = "top" if body else "center"
+    ax.text(x + 0.035, title_y, title, ha="left", va=title_va, fontsize=10.2, weight="bold", color=color)
+    if body:
+        ax.text(x + 0.035, y + h - 0.215, body, ha="left", va="top", fontsize=8.45, color="#172033", linespacing=1.18)
 
 
 def plot_t1_fit(
@@ -217,7 +220,7 @@ def plot_research_snapshot(summary: dict[str, float | int], save_path: str | Pat
         "Signal extraction",
         f"{int(summary['n_echo_peaks'])} detected echo peaks\n"
         f"baseline RMS {summary['baseline_rms_mV']:.3f} mV\n"
-        "pre-trigger noise estimate",
+        "pre-trigger noise",
         BLUE,
     )
     _card(
@@ -228,7 +231,7 @@ def plot_research_snapshot(summary: dict[str, float | int], save_path: str | Pat
         0.68,
         "Relaxation estimates",
         f"T1 fit {summary['t1_fit_ms']:.2f} +/- {summary['t1_fit_sigma_ms']:.2f} ms\n"
-        f"T1 zero crossing {summary['t1_zero_crossing_ms']:.2f} +/- {summary['t1_zero_crossing_sigma_ms']:.2f} ms\n"
+        f"T1 zero {summary['t1_zero_crossing_ms']:.2f} +/- {summary['t1_zero_crossing_sigma_ms']:.2f} ms\n"
         f"T2 fit {summary['t2_fit_ms']:.2f} +/- {summary['t2_fit_sigma_ms']:.2f} ms",
         ORANGE,
     )
@@ -239,7 +242,7 @@ def plot_research_snapshot(summary: dict[str, float | int], save_path: str | Pat
         0.28,
         0.68,
         "Reproducible outputs",
-        "processed echo table\nJSON summary\nfigures and regression tests",
+        "echo table\nJSON summary\nfigures + tests",
         GREEN,
     )
 
@@ -266,6 +269,7 @@ def plot_research_snapshot(summary: dict[str, float | int], save_path: str | Pat
     ax_bar.set_yticks(ypos, labels)
     ax_bar.set_xlabel("Relaxation time (ms)")
     ax_bar.set_title("Independent relaxation-time summaries", weight="bold", loc="left")
+    ax_bar.set_xlim(0, max(values + errors) + 8)
     for y, value, error in zip(ypos, values, errors):
         ax_bar.text(value + error + 1.0, y, f"{value:.2f} +/- {error:.2f}", va="center", color=GRAY, fontsize=9.5)
 
