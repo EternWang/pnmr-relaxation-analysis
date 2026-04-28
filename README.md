@@ -19,10 +19,6 @@ reporting, generated figures, and regression tests.
 The repository is organized so that the main reported quantities can be traced back to
 raw scope exports and timing measurements without relying on the PDF report alone.
 
-## Research snapshot
-
-<img src="figures/research_snapshot.png" alt="PNMR research snapshot" width="860">
-
 ## Key results
 
 | Quantity | Result |
@@ -75,7 +71,6 @@ Main outputs:
 - `data/processed/summary_results.json`
 - `data/processed/t2_echo_peaks.csv`
 - `figures/results_dashboard.png`
-- `figures/research_snapshot.png`
 - `figures/t1_fit.png`
 - `figures/t2_fit.png`
 - `figures/t2_waveform_with_peaks.png`

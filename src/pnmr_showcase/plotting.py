@@ -4,7 +4,6 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.patches import FancyBboxPatch
 
 from .models import t1_magnitude_model, t2_envelope_model
 
@@ -39,24 +38,6 @@ def save_figure(fig: plt.Figure, save_path: Path) -> None:
     fig.tight_layout()
     fig.savefig(save_path, bbox_inches="tight", facecolor="white")
     plt.close(fig)
-
-
-def _card(ax: plt.Axes, x: float, y: float, w: float, h: float, title: str, body: str, color: str) -> None:
-    box = FancyBboxPatch(
-        (x, y),
-        w,
-        h,
-        boxstyle="round,pad=0.018,rounding_size=0.025",
-        facecolor="white",
-        edgecolor="#CBD5E1",
-        linewidth=1.0,
-    )
-    ax.add_patch(box)
-    title_y = y + h - 0.075 if body else y + h / 2
-    title_va = "top" if body else "center"
-    ax.text(x + 0.035, title_y, title, ha="left", va=title_va, fontsize=10.2, weight="bold", color=color)
-    if body:
-        ax.text(x + 0.035, y + h - 0.215, body, ha="left", va="top", fontsize=8.45, color="#172033", linespacing=1.18)
 
 
 def plot_t1_fit(
@@ -189,102 +170,3 @@ def plot_results_dashboard(
     )
 
     save_figure(fig, save_path)
-
-
-def plot_research_snapshot(summary: dict[str, float | int], save_path: str | Path) -> None:
-    set_style()
-    save_path = Path(save_path)
-    fig = plt.figure(figsize=(11.2, 5.4), facecolor="white")
-    grid = fig.add_gridspec(2, 3, height_ratios=[0.92, 1.08], width_ratios=[1.0, 1.0, 1.1])
-
-    ax_cards = fig.add_subplot(grid[0, :])
-    ax_cards.axis("off")
-    ax_cards.set_xlim(0, 1)
-    ax_cards.set_ylim(0, 1)
-    fig.suptitle("Pulsed NMR relaxation analysis", x=0.04, y=0.985, ha="left", fontsize=17, weight="bold", color="#172033")
-    fig.text(
-        0.04,
-        0.925,
-        "Raw oscilloscope traces and timing records reduced to reproducible T1/T2 estimates with uncertainty checks.",
-        ha="left",
-        fontsize=10.5,
-        color=GRAY,
-    )
-
-    _card(
-        ax_cards,
-        0.02,
-        0.08,
-        0.28,
-        0.68,
-        "Signal extraction",
-        f"{int(summary['n_echo_peaks'])} detected echo peaks\n"
-        f"baseline RMS {summary['baseline_rms_mV']:.3f} mV\n"
-        "pre-trigger noise",
-        BLUE,
-    )
-    _card(
-        ax_cards,
-        0.36,
-        0.08,
-        0.28,
-        0.68,
-        "Relaxation estimates",
-        f"T1 fit {summary['t1_fit_ms']:.2f} +/- {summary['t1_fit_sigma_ms']:.2f} ms\n"
-        f"T1 zero {summary['t1_zero_crossing_ms']:.2f} +/- {summary['t1_zero_crossing_sigma_ms']:.2f} ms\n"
-        f"T2 fit {summary['t2_fit_ms']:.2f} +/- {summary['t2_fit_sigma_ms']:.2f} ms",
-        ORANGE,
-    )
-    _card(
-        ax_cards,
-        0.70,
-        0.08,
-        0.28,
-        0.68,
-        "Reproducible outputs",
-        "echo table\nJSON summary\nfigures + tests",
-        GREEN,
-    )
-
-    ax_bar = fig.add_subplot(grid[1, :2])
-    labels = ["T1 zero crossing", "T1 nonlinear fit", "T2 envelope fit"]
-    values = np.array(
-        [
-            summary["t1_zero_crossing_ms"],
-            summary["t1_fit_ms"],
-            summary["t2_fit_ms"],
-        ],
-        dtype=float,
-    )
-    errors = np.array(
-        [
-            summary["t1_zero_crossing_sigma_ms"],
-            summary["t1_fit_sigma_ms"],
-            summary["t2_fit_sigma_ms"],
-        ],
-        dtype=float,
-    )
-    ypos = np.arange(len(labels))
-    ax_bar.barh(ypos, values, xerr=errors, color=[BLUE, ORANGE, GREEN], ecolor="#7FA7C7", capsize=4)
-    ax_bar.set_yticks(ypos, labels)
-    ax_bar.set_xlabel("Relaxation time (ms)")
-    ax_bar.set_title("Independent relaxation-time summaries", weight="bold", loc="left")
-    ax_bar.set_xlim(0, max(values + errors) + 8)
-    for y, value, error in zip(ypos, values, errors):
-        ax_bar.text(value + error + 1.0, y, f"{value:.2f} +/- {error:.2f}", va="center", color=GRAY, fontsize=9.5)
-
-    ax_flow = fig.add_subplot(grid[1, 2])
-    ax_flow.axis("off")
-    ax_flow.set_xlim(0, 1)
-    ax_flow.set_ylim(0, 1)
-    ax_flow.set_title("Analysis chain", weight="bold", loc="left", pad=8)
-    steps = ["raw waveform", "baseline + peaks", "weighted fits", "tables + figures"]
-    y_positions = [0.82, 0.60, 0.38, 0.16]
-    for idx, (step, y) in enumerate(zip(steps, y_positions)):
-        _card(ax_flow, 0.08, y, 0.78, 0.13, f"{idx + 1}. {step}", "", [BLUE, ORANGE, GREEN, GRAY][idx])
-        if idx < len(steps) - 1:
-            ax_flow.annotate("", xy=(0.47, y - 0.015), xytext=(0.47, y - 0.07), arrowprops={"arrowstyle": "->", "color": "#94A3B8"})
-
-    fig.tight_layout(rect=[0.03, 0.02, 0.99, 0.9])
-    fig.savefig(save_path, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
