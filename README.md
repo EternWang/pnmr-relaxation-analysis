@@ -38,11 +38,11 @@ measurements.
 
 **Summary dashboard**
 
-![Results dashboard](figures/results_dashboard.png)
+<img src="figures/results_dashboard.png" alt="PNMR T1 and T2 results dashboard" width="820">
 
 **Echo detection on the raw waveform**
 
-![Waveform with detected peaks](figures/t2_waveform_with_peaks.png)
+<img src="figures/t2_waveform_with_peaks.png" alt="Echo detection on raw waveform" width="820">
 
 ## Analysis workflow
 
