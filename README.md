@@ -16,6 +16,7 @@ reporting, generated figures, and regression tests.
   estimation, and complementary checks for `T1` and `T2`.
 - **Reproducibility signal:** package-style source code, CLI script, Makefile, and
   regression tests make the analysis rerunnable from raw inputs.
+
 The repository is organized so that the main reported quantities can be traced back to
 raw scope exports and timing measurements without relying on the PDF report alone.
 
