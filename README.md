@@ -2,13 +2,11 @@
 
 This repository analyzes a pulsed nuclear magnetic resonance experiment from the UCSB upper-division physics lab. The focus is on a reproducible Python workflow for extracting resonance, `T1`, and `T2` from oscilloscope waveforms and manually recorded timing measurements.
 
-## What This Demonstrates
+## Project Overview
 
-This project shows a complete Python analysis loop: raw waveform parsing, noise
-estimation, automated peak detection, weighted nonlinear fitting, uncertainty
-reporting, generated figures, and regression tests. The same workflow habits transfer
-directly to data pipelines where noisy inputs must become auditable, reproducible
-measurements.
+This project shows a complete Python analysis loop: raw waveform parsing, baseline
+noise estimation, automated peak detection, weighted nonlinear fitting, uncertainty
+reporting, generated figures, and regression tests.
 
 ## At a Glance
 
@@ -18,9 +16,12 @@ measurements.
   estimation, and complementary checks for `T1` and `T2`.
 - **Reproducibility signal:** package-style source code, CLI script, Makefile, and
   regression tests make the analysis rerunnable from raw inputs.
-- **Transferable skill:** the project demonstrates how I turn noisy measurement data
-  into documented quantities, the same discipline needed for empirical social-science
-  and institutional-record pipelines.
+The repository is organized so that the main reported quantities can be traced back to
+raw scope exports and timing measurements without relying on the PDF report alone.
+
+## Research snapshot
+
+<img src="figures/research_snapshot.png" alt="PNMR research snapshot" width="860">
 
 ## Key results
 
@@ -74,6 +75,7 @@ Main outputs:
 - `data/processed/summary_results.json`
 - `data/processed/t2_echo_peaks.csv`
 - `figures/results_dashboard.png`
+- `figures/research_snapshot.png`
 - `figures/t1_fit.png`
 - `figures/t2_fit.png`
 - `figures/t2_waveform_with_peaks.png`

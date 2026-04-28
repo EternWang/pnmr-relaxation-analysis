@@ -7,7 +7,13 @@ from pathlib import Path
 import pandas as pd
 
 from .io import load_t1_dataset, load_zero_crossing_metadata, read_scope_csv
-from .plotting import plot_results_dashboard, plot_t1_fit, plot_t2_fit, plot_waveform_with_peaks
+from .plotting import (
+    plot_research_snapshot,
+    plot_results_dashboard,
+    plot_t1_fit,
+    plot_t2_fit,
+    plot_waveform_with_peaks,
+)
 from .t1 import fit_t1_inversion_recovery, propagate_t1_from_zero_crossing
 from .t2 import estimate_baseline, extract_echo_peaks, fit_t2_envelope
 
@@ -96,6 +102,7 @@ def main() -> None:
         "n_echo_peaks": int(len(peaks.time_ms)),
     }
     (args.processed_dir / "summary_results.json").write_text(json.dumps(summary, indent=2))
+    plot_research_snapshot(summary, args.figures_dir / "research_snapshot.png")
 
     print(json.dumps(summary, indent=2))
 
