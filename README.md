@@ -2,15 +2,15 @@
 
 This repository analyzes a pulsed nuclear magnetic resonance experiment from the UCSB upper-division physics lab. The focus is on a reproducible Python workflow for extracting resonance, `T1`, and `T2` from oscilloscope waveforms and manually recorded timing measurements.
 
-## Research Portfolio Signal
+## What This Demonstrates
 
-This project is included in my research-software portfolio because it shows a complete
-Python analysis loop: raw waveform parsing, noise estimation, automated peak detection,
-weighted nonlinear fitting, uncertainty reporting, generated figures, and regression
-tests. The same workflow habits transfer directly to computational social-science data
-pipelines where noisy inputs must become auditable, reproducible measurements.
+This project shows a complete Python analysis loop: raw waveform parsing, noise
+estimation, automated peak detection, weighted nonlinear fitting, uncertainty
+reporting, generated figures, and regression tests. The same workflow habits transfer
+directly to data pipelines where noisy inputs must become auditable, reproducible
+measurements.
 
-## Reviewer Quick Scan
+## At a Glance
 
 - **Data workflow:** oscilloscope waveforms and manual timing records are parsed into
   processed tables, JSON summaries, and rendered figures.
